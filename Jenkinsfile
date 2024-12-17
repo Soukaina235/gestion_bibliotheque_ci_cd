@@ -42,7 +42,7 @@ pipeline {
 //        }
         stage('Quality Analysis') {
             steps {
-                withSonarQubeEnv(installationName: 'sonar' , credentialsId: 'sonar') {
+                withSonarQubeEnv(installationName: 'sonar' , credentialsId: sonar) {
                     sh 'mvn sonar:sonar'
                 }
             }
