@@ -45,16 +45,16 @@ pipeline {
             }
         }
     }
-//    post {
-//        success {
-//            emailext to: 'votre-email@example.com',
-//                subject: 'Build Success',
-//                body: 'Le build a été complété avec succès.'
-//        }
-//        failure {
-//            emailext to: 'votre-email@example.com',
-//                subject: 'Build Failed',
-//                body: 'Le build a échoué.'
-//        }
-//    }
+    post {
+        success {
+            emailext to: 'soukaina.jabri001@gmail.com',
+                subject: 'Build Success',
+                body: 'Le build a été complété avec succès.'
+        }
+        failure {
+            emailext to: 'soukaina.jabri001@gmail.com',
+                subject: 'Build Failed',
+                body: 'Le build a échoué.'
+        }
+    }
 }
