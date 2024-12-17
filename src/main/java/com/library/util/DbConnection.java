@@ -19,6 +19,9 @@ public class DbConnection {
 
 
     public static Connection getConnection() throws SQLException {
+        System.out.println("url " + URL);
+        System.out.println("user " + USER);
+        System.out.println("password " + PASSWORD);
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             return DriverManager.getConnection(URL, USER, PASSWORD);
