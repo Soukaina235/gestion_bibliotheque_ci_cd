@@ -32,10 +32,17 @@ pipeline {
                 sh 'mvn test'
             }
         }
+//        stage('Quality Analysis') {
+//            steps {
+//                withSonarQubeEnv('SonarQube') {
+////                    sh '${MAVEN_HOME}/bin/mvn sonar:sonar'
+//                    sh 'mvn sonar:sonar'
+//                }
+//            }
+//        }
         stage('Quality Analysis') {
             steps {
-                withSonarQubeEnv('SonarQube') {
-//                    sh '${MAVEN_HOME}/bin/mvn sonar:sonar'
+                withSonarQubeEnv(installationName: 'sonar' , credentialsId: 'sonar') {
                     sh 'mvn sonar:sonar'
                 }
             }
