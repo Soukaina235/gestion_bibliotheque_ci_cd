@@ -8,6 +8,21 @@
     <name>mon-projet</name>
     <url>http://maven.apache.org</url>
 
+    <properties>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+        <maven.compiler.release>17</maven.compiler.release>
+
+        <sonar.projectKey>bibliotheque</sonar.projectKey>
+        <sonar.sources>.</sonar.sources>
+        <sonar.tests>.</sonar.tests>
+        <sonar.test.inclusions>**/*Test*/**</sonar.test.inclusions>
+        <sonar.exclusions>**/*Test*/**</sonar.exclusions>
+        <sonar.excludes>src/test/</sonar.excludes>
+        <sonar.host.url>https://8292-197-147-182-20.ngrok-free.app</sonar.host.url>
+        <sonar.login>sqp_21469daaff7f8e46af04d585d6c16262d6232622</sonar.login>
+    </properties>
+
     <build>
         <plugins>
             <plugin>
@@ -56,12 +71,6 @@
             </plugin>
         </plugins>
     </build>
-
-    <properties>
-        <maven.compiler.source>17</maven.compiler.source>
-        <maven.compiler.target>17</maven.compiler.target>
-        <maven.compiler.release>17</maven.compiler.release>
-    </properties>
 
     <dependencies>
         <!-- JUnit 5 Jupiter API -->
