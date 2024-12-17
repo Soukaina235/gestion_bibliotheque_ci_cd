@@ -8,9 +8,9 @@ pipeline {
 //        MAVEN_HOME = tool 'Maven'
         DB_HOST = 'host.docker.internal'
         REPO_URL = 'https://github.com/Soukaina235/gestion_bibliotheque_ci_cd.git'
-        DB_URL="jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1"
-        DB_USER="sa"
-        DB_PASSWORD=""
+        DB_URL='jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1'
+        DB_USER='sa'
+        DB_PASSWORD=''
     }
     stages {
         stage('Clean Workspace') {
