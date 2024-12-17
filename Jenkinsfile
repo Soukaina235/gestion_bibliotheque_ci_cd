@@ -54,14 +54,24 @@ pipeline {
 //        }
 
 
+//        stage('Quality Analysis') {
+//            steps {
+//                withSonarQubeEnv(SONARQUBE_SERVER) {
+//                    sh 'mvn sonar:sonar -Dsonar.login=$SONARQUBE_CREDENTIALS_ID'
+//                }
+//            }
+//        }
+
+
         stage('Quality Analysis') {
             steps {
                 withSonarQubeEnv(SONARQUBE_SERVER) {
-                    sh 'mvn sonar:sonar -Dsonar.login=$SONARQUBE_CREDENTIALS_ID'
+                    withCredentials([string(credentialsId: SONARQUBE_CREDENTIALS_ID, variable: 'SONAR_TOKEN')]) {
+                        sh 'mvn sonar:sonar -Dsonar.login=$SONAR_TOKEN'
+                    }
                 }
             }
         }
-
 
 //        stage('Quality Analysis') {
 //            script {
