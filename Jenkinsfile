@@ -6,6 +6,7 @@ pipeline {
     }
     environment {
 //        MAVEN_HOME = tool 'Maven'
+        DB_HOST = 'host.docker.internal'
         REPO_URL = 'https://github.com/Soukaina235/gestion_bibliotheque_ci_cd.git'
     }
     stages {
