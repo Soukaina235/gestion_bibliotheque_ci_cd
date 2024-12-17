@@ -5,7 +5,7 @@ pipeline {
         maven 'maven'
     }
     environment {
-        MAVEN_HOME = tool 'Maven'
+//        MAVEN_HOME = tool 'Maven'
         REPO_URL = 'https://github.com/Soukaina235/gestion_bibliotheque_ci_cd.git'
     }
     stages {
