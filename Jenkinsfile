@@ -6,13 +6,13 @@ pipeline {
     }
     environment {
 //        MAVEN_HOME = tool 'Maven'
-        DB_HOST = 'host.docker.internal'
+//        DB_HOST = 'host.docker.internal'
         REPO_URL = 'https://github.com/Soukaina235/gestion_bibliotheque_ci_cd.git'
 //        SONARQUBE_SERVER = 'SonarServer'
 //        SONARQUBE_TOKEN = 'sqp_21469daaff7f8e46af04d585d6c16262d6232622'
         SONARQUBE_SERVER = 'SonarServer'
         // Define the credentials ID for the SonarQube token
-        SONARQUBE_CREDENTIALS_ID = 'sonar'
+        SONARQUBE_CREDENTIALS_ID = 'sonar-token'
     }
     stages {
         stage('Clean Workspace') {
