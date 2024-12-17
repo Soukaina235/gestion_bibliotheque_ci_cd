@@ -1,0 +1,5 @@
+# Created at 2024-12-17T12:56:38.859
+Boot Manifest-JAR contains absolute paths in classpath 'D:\ENSA\GI3\ProgSysteme_et_Qualite_Logicielle\QualiteLogicielle\Projet\GestionBibliotheque\target\test-classes'
+Hint: <argLine>-Djdk.net.URLClassPath.disableClassPathURLCheck=true</argLine>
+'other' has different root
+
