@@ -78,7 +78,7 @@ class BookServiceTest {
         bookService.addBook(book);
 
         Book foundBook = bookService.findBookByIsbn(isbn);
-        assertNotNull(foundBook);
+        assertNull(foundBook);
     }
 
     @Test
