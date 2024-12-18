@@ -10,35 +10,35 @@ pipeline {
         SONARQUBE_CREDENTIALS_ID = 'sonar-token'
     }
     stages {
-//        stage('Clean Workspace') {
-//            steps {
-//                cleanWs()
-//            }
-//        }
-//        stage('Checkout') {
-//            steps {
-//                git branch: 'main', credentialsId: 'github', url: REPO_URL
-//            }
-//        }
-//        stage('Build') {
-//            steps {
-//                sh 'mvn clean compile'
-//            }
-//        }
-//        stage('Test') {
-//            steps {
-//                sh 'mvn test'
-//            }
-//        }
-//        stage('Quality Analysis') {
-//            steps {
-//                withSonarQubeEnv(SONARQUBE_SERVER) {
-//                    withCredentials([string(credentialsId: SONARQUBE_CREDENTIALS_ID, variable: 'SONAR_TOKEN')]) {
-//                        sh 'mvn sonar:sonar -Dsonar.login=$SONAR_TOKEN'
-//                    }
-//                }
-//            }
-//        }
+        stage('Clean Workspace') {
+            steps {
+                cleanWs()
+            }
+        }
+        stage('Checkout') {
+            steps {
+                git branch: 'main', credentialsId: 'github', url: REPO_URL
+            }
+        }
+        stage('Build') {
+            steps {
+                sh 'mvn clean compile'
+            }
+        }
+        stage('Test') {
+            steps {
+                sh 'mvn test'
+            }
+        }
+        stage('Quality Analysis') {
+            steps {
+                withSonarQubeEnv(SONARQUBE_SERVER) {
+                    withCredentials([string(credentialsId: SONARQUBE_CREDENTIALS_ID, variable: 'SONAR_TOKEN')]) {
+                        sh 'mvn sonar:sonar -Dsonar.login=$SONAR_TOKEN'
+                    }
+                }
+            }
+        }
         stage('Deploy') {
             steps {
                 echo 'Déploiement simulé réussi'
