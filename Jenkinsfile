@@ -48,8 +48,16 @@ pipeline {
     post {
         success {
             mail to: 'soukaina.jabri333@gmail.com',
-                subject: 'Build Success',
-                body: 'Le build a été complété avec succès.'
+                    subject: "Build réussi - Version ${env.BUILD_TAG}",
+                    body: """
+                        La compilation a été réalisée avec succès. Voici les détails de la construction :
+                
+                        - **Version du build** : ${env.BUILD_TAG}
+                        - **Numéro de build** : ${env.BUILD_NUMBER}
+                        - **Nom du job** : ${env.JOB_NAME}
+                        - **URL du job** : ${env.BUILD_URL}
+                        - **Date de la compilation** : ${new Date()}
+                        """
         }
         failure {
             mail to: 'soukaina.jabri333@gmail.com',
