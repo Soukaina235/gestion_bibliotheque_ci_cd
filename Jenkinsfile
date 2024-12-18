@@ -61,8 +61,16 @@ pipeline {
         }
         failure {
             mail to: 'soukaina.jabri333@gmail.com',
-                subject: 'Build Failed',
-                body: 'Le build a échoué.'
+                    subject: "Build échoué - Version ${env.BUILD_TAG}",
+                    body: """
+                        La compilation a échouée. Voici les détails de la construction :
+                
+                        - **Version du build** : ${env.BUILD_TAG}
+                        - **Numéro de build** : ${env.BUILD_NUMBER}
+                        - **Nom du job** : ${env.JOB_NAME}
+                        - **URL du job** : ${env.BUILD_URL}
+                        - **Date de la compilation** : ${new Date()}
+                        """
         }
     }
 }
