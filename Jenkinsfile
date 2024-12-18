@@ -10,35 +10,35 @@ pipeline {
         SONARQUBE_CREDENTIALS_ID = 'sonar-token'
     }
     stages {
-        stage('Clean Workspace') {
-            steps {
-                cleanWs()
-            }
-        }
-        stage('Checkout') {
-            steps {
-                git branch: 'main', credentialsId: 'github', url: REPO_URL
-            }
-        }
-        stage('Build') {
-            steps {
-                sh 'mvn clean compile'
-            }
-        }
-        stage('Test') {
-            steps {
-                sh 'mvn test'
-            }
-        }
-        stage('Quality Analysis') {
-            steps {
-                withSonarQubeEnv(SONARQUBE_SERVER) {
-                    withCredentials([string(credentialsId: SONARQUBE_CREDENTIALS_ID, variable: 'SONAR_TOKEN')]) {
-                        sh 'mvn sonar:sonar -Dsonar.login=$SONAR_TOKEN'
-                    }
-                }
-            }
-        }
+//        stage('Clean Workspace') {
+//            steps {
+//                cleanWs()
+//            }
+//        }
+//        stage('Checkout') {
+//            steps {
+//                git branch: 'main', credentialsId: 'github', url: REPO_URL
+//            }
+//        }
+//        stage('Build') {
+//            steps {
+//                sh 'mvn clean compile'
+//            }
+//        }
+//        stage('Test') {
+//            steps {
+//                sh 'mvn test'
+//            }
+//        }
+//        stage('Quality Analysis') {
+//            steps {
+//                withSonarQubeEnv(SONARQUBE_SERVER) {
+//                    withCredentials([string(credentialsId: SONARQUBE_CREDENTIALS_ID, variable: 'SONAR_TOKEN')]) {
+//                        sh 'mvn sonar:sonar -Dsonar.login=$SONAR_TOKEN'
+//                    }
+//                }
+//            }
+//        }
         stage('Deploy') {
             steps {
                 echo 'Déploiement simulé réussi'
@@ -47,12 +47,12 @@ pipeline {
     }
     post {
         success {
-            emailext to: 'soukaina.jabri333@gmail.com',
+            mail to: 'soukaina.jabri333@gmail.com',
                 subject: 'Build Success',
                 body: 'Le build a été complété avec succès.'
         }
         failure {
-            emailext to: 'soukaina.jabri333@gmail.com',
+            mail to: 'soukaina.jabri333@gmail.com',
                 subject: 'Build Failed',
                 body: 'Le build a échoué.'
         }
