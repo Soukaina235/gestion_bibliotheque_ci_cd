@@ -10,7 +10,8 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 @TestMethodOrder(org.junit.jupiter.api.MethodOrderer.OrderAnnotation.class)
 class StudentServiceTest {
@@ -56,20 +57,20 @@ class StudentServiceTest {
         assertEquals("Jane Doe", studentDAO.getStudentById(1).getName());
     }
 
-//    @Test
-//    @Order(2)
-//    void testUpdateStudent() {
-//        Student studentupdated = new Student(1, "Alice Smith", "alice.smith@example.com");
-//        studentService.updateStudent(studentupdated);
-//        assertEquals("Alice Smith", studentDAO.getStudentById(1).getName());
-//    }
-//
-//    @Test
-//    @Order(3)
-//    void testDeleteStudent() {
-//        studentService.deleteStudent(1);
-//        assertNull(studentDAO.getStudentById(1));
-//    }
+    @Test
+    @Order(2)
+    void testUpdateStudent() {
+        Student studentupdated = new Student(1, "Alice Smith", "alice.smith@example.com");
+        studentService.updateStudent(studentupdated);
+        assertEquals("Alice Smith", studentDAO.getStudentById(1).getName());
+    }
+
+    @Test
+    @Order(3)
+    void testDeleteStudent() {
+        studentService.deleteStudent(1);
+        assertNull(studentDAO.getStudentById(1));
+    }
 
     @Test
     @Order(4)
@@ -78,6 +79,6 @@ class StudentServiceTest {
         Student student2 = new Student(3, "Bob", "bob@example.com");
         studentService.addStudent(student1);
         studentService.addStudent(student2);
-        assertEquals(3, studentDAO.getAllStudents().size());
+        assertEquals(2, studentDAO.getAllStudents().size());
     }
 }

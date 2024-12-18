@@ -78,10 +78,11 @@ public class StudentDAO {
     }
 
     public void updateStudent(Student student) {
-        String query = "UPDATE students SET name = ? WHERE id = ?";
+        String query = "UPDATE students SET name = ?, email = ? WHERE id = ?";
         try (PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setString(1, student.getName());
-            statement.setInt(2, student.getId());
+            statement.setString(2, student.getEmail());
+            statement.setInt(3, student.getId());
             statement.executeUpdate();
         } catch (SQLException e) {
             LOGGER.log(Level.SEVERE, "Erreur lors de la mise à jour de l'étudiant", e);

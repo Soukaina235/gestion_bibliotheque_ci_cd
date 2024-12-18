@@ -45,4 +45,12 @@ public class StudentService {
     public Student findStudentByEmail(String email) {
         return studentDAO.getStudentByEmail(email);
     }
+
+    public void updateStudent(Student student) {
+        studentDAO.updateStudent(student);
+    }
+
+    public void deleteStudent(int id) {
+        studentDAO.deleteStudent(id);
+    }
 }

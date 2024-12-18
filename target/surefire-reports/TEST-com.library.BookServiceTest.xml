@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.library.BookServiceTest" time="8.003" tests="3" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.library.BookServiceTest" time="12.058" tests="5" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="17"/>
     <property name="sun.cpu.isalist" value="amd64"/>
@@ -15,7 +15,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="US"/>
     <property name="sun.boot.library.path" value="C:\Users\pc\.jdks\corretto-17.0.11\bin"/>
-    <property name="sun.java.command" value="C:\Users\pc\AppData\Local\Temp\surefire9620971565967321480\surefirebooter-20241217190031976_3.jar C:\Users\pc\AppData\Local\Temp\surefire9620971565967321480 2024-12-17T19-00-31_811-jvmRun1 surefire-20241217190031976_1tmp surefire_0-20241217190031976_2tmp"/>
+    <property name="sun.java.command" value="C:\Users\pc\AppData\Local\Temp\surefire6266408808555801467\surefirebooter-20241218150236614_3.jar C:\Users\pc\AppData\Local\Temp\surefire6266408808555801467 2024-12-18T15-02-36_155-jvmRun1 surefire-20241218150236614_1tmp surefire_0-20241218150236614_2tmp"/>
     <property name="jdk.debug" value="release"/>
     <property name="surefire.test.class.path" value="D:\ENSA\GI3\ProgSysteme_et_Qualite_Logicielle\QualiteLogicielle\Projet\GestionBibliotheque\target\test-classes;D:\ENSA\GI3\ProgSysteme_et_Qualite_Logicielle\QualiteLogicielle\Projet\GestionBibliotheque\target\classes;C:\Users\pc\.m2\repository\junit\junit\4.13.2\junit-4.13.2.jar;C:\Users\pc\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;C:\Users\pc\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.11.3\junit-jupiter-api-5.11.3.jar;C:\Users\pc\.m2\repository\org\opentest4j\opentest4j\1.3.0\opentest4j-1.3.0.jar;C:\Users\pc\.m2\repository\org\junit\platform\junit-platform-commons\1.11.3\junit-platform-commons-1.11.3.jar;C:\Users\pc\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\pc\.m2\repository\com\mysql\mysql-connector-j\8.3.0\mysql-connector-j-8.3.0.jar;C:\Users\pc\.m2\repository\com\google\protobuf\protobuf-java\3.25.1\protobuf-java-3.25.1.jar;C:\Users\pc\.m2\repository\com\h2database\h2\2.2.224\h2-2.2.224.jar;"/>
     <property name="sun.cpu.endian" value="little"/>
@@ -30,7 +30,7 @@
     <property name="line.separator" value="&#10;"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
-    <property name="surefire.real.class.path" value="C:\Users\pc\AppData\Local\Temp\surefire9620971565967321480\surefirebooter-20241217190031976_3.jar"/>
+    <property name="surefire.real.class.path" value="C:\Users\pc\AppData\Local\Temp\surefire6266408808555801467\surefirebooter-20241218150236614_3.jar"/>
     <property name="user.script" value=""/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="17.0.11+9-LTS"/>
@@ -57,18 +57,26 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="61.0"/>
   </properties>
-  <testcase name="testAddBook" classname="com.library.BookServiceTest" time="2.116">
+  <testcase name="testAddBook" classname="com.library.BookServiceTest" time="2.384">
     <system-out><![CDATA[Test teardown: Clearing database...
 Database cleared successfully!
 Livre inséré avec succès !
 ]]></system-out>
   </testcase>
-  <testcase name="testFindBookById" classname="com.library.BookServiceTest" time="1.342">
+  <testcase name="testFindBookById" classname="com.library.BookServiceTest" time="1.298">
     <system-out><![CDATA[Livre inséré avec succès !
 ]]></system-out>
   </testcase>
-  <testcase name="testFindBookByIsbn" classname="com.library.BookServiceTest" time="1.256">
+  <testcase name="testFindBookByIsbn" classname="com.library.BookServiceTest" time="1.277">
     <system-out><![CDATA[Livre inséré avec succès !
+]]></system-out>
+  </testcase>
+  <testcase name="testUpdateStudent" classname="com.library.BookServiceTest" time="1.421">
+    <system-out><![CDATA[Book updated successfully!
+]]></system-out>
+  </testcase>
+  <testcase name="testDeleteStudent" classname="com.library.BookServiceTest" time="1.472">
+    <system-out><![CDATA[Livre supprimé avec succès !
 ]]></system-out>
   </testcase>
 </testsuite>

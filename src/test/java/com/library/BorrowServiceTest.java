@@ -71,13 +71,6 @@ class BorrowServiceTest {
         assertFalse(bookDAO.getBookById(1).isAvailable());
     }
 
-//    @Test
-//    void testReturnBook() {
-//        borrowService.borrowBook(1, 1);
-//        assertEquals("Livre retourné avec succès!", borrowService.returnBook(1, 1));
-//        assertTrue(bookDAO.getBookById(1).get().isAvailable());
-//    }
-
     @Test
     @Order(2)
     void testBorrowBookNotAvailable() {
@@ -89,13 +82,13 @@ class BorrowServiceTest {
         assertEquals("Le livre n'est pas disponible.", result);
     }
 
-//    @Test
-//    @Order(3)
-//    void testBorrowBookStudentNotFound() {
-//        Student student = studentDAO.getStudentById(1);
-//        Book book = bookDAO.getBookById(4);
-//        Borrow borrow = new Borrow(student, book);
-//        String result = borrowService.borrowBook(borrow);
-//        assertEquals("Étudiant ou livre non trouvé.", result);
-//    }
+    @Test
+    @Order(3)
+    void testReturnBook() {
+        Student student = studentDAO.getStudentById(1);
+        Book book = bookDAO.getBookById(1);
+        Borrow borrow = new Borrow(student, book);
+        assertEquals("Livre retourné avec succès!", borrowService.returnBook(borrow));
+        assertTrue(bookDAO.getBookById(1).isAvailable());
+    }
 }
