@@ -103,4 +103,45 @@ public class BookDAO {
         
         return books;
     }
+
+    public void delete(int id) {
+        String sql = "DELETE FROM books WHERE id = ?";
+        try (Connection connection = DbConnection.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+
+            statement.setInt(1, id);
+
+            int rowsDeleted = statement.executeUpdate();
+            if (rowsDeleted > 0) {
+                System.out.println("Livre supprimé avec succès !");
+            } else {
+                System.out.println("Aucun livre trouvé avec cet ISBN.");
+            }
+        } catch (SQLException e) {
+            System.err.println("Erreur lors de la suppression du livre : " + e.getMessage());
+        }
+    }
+
+    public void update(Book book) {
+        String sql = "UPDATE books SET title = ?, author = ?, published_year = ?, is_available = ? WHERE id = ?";
+        try (Connection connection = DbConnection.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+
+            statement.setString(1, book.getTitle());
+            statement.setString(2, book.getAuthor());
+            statement.setInt(3, book.getPublishedYear());
+            statement.setBoolean(4, book.isAvailable());
+            statement.setInt(5, book.getId());
+
+            int rowsUpdated = statement.executeUpdate();
+            if (rowsUpdated > 0) {
+                System.out.println("Book updated successfully!");
+            } else {
+                System.out.println("No book found with the given ID for update.");
+            }
+        } catch (SQLException e) {
+            System.err.println("Error updating the book: " + e.getMessage());
+        }
+    }
+
 }

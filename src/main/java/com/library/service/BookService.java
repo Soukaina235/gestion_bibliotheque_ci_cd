@@ -30,14 +30,11 @@ public class BookService {
         return bookDAO.getBookByIsbn(isbn);
     }
 
+    public void deleteBook(int id) {
+        bookDAO.delete(id);
+    }
 
-    // Supprimer un livre par ID
-//    public void deleteBook(int id) {
-//        bookDAO.delete(id);
-//    }
-
-    // Mise à jour des informations d'un livre
-//    public void updateBook(Book book) {
-//        bookDAO.update(book);
-//    }
+    public void updateBook(Book book) {
+        bookDAO.update(book);
+    }
 }

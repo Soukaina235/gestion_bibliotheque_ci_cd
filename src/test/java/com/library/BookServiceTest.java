@@ -10,8 +10,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 @TestMethodOrder(org.junit.jupiter.api.MethodOrderer.OrderAnnotation.class)
 class BookServiceTest {
@@ -80,5 +79,20 @@ class BookServiceTest {
 
         Book foundBook = bookService.findBookByIsbn(isbn);
         assertNotNull(foundBook);
+    }
+
+    @Test
+    @Order(4)
+    void testUpdateStudent() {
+        Book bookUpdated = new Book(3, "C Programming", "Jane Doe", "09876", 2020, true);
+        bookService.updateBook(bookUpdated);
+        assertEquals(2020, bookDAO.getBookById(3).getPublishedYear());
+    }
+
+    @Test
+    @Order(5)
+    void testDeleteStudent() {
+        bookService.deleteBook(1);
+        assertNull(bookDAO.getBookById(1));
     }
 }

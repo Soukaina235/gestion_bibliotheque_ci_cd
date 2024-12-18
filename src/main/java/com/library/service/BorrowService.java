@@ -22,7 +22,7 @@ public class BorrowService {
     }
 
     public String borrowBook(Borrow borrow) {
-        return borrowDAO.save(borrow);
+        return borrowDAO.borrowBook(borrow);
     }
 
     public void displayBorrows() {
@@ -30,5 +30,9 @@ public class BorrowService {
         for (Borrow borrow : borrowDAO.getAllBorrows()) {
             System.out.println(borrow);
         }
+    }
+
+    public String returnBook(Borrow borrow) {
+        return borrowDAO.returnBook(borrow);
     }
 }

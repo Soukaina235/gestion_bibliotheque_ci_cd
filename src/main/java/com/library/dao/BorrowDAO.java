@@ -6,6 +6,7 @@ import com.library.model.Borrow;
 import com.library.model.Student;
 import com.library.util.DbConnection;
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,39 +38,7 @@ public class BorrowDAO {
         return borrows;
     }
 
-//    public boolean save (Borrow borrow) {
-//        String query = "INSERT INTO borrows (student_id, book_id, borrow_date, return_date) VALUES (?, ?, ?, ?)";
-//        String isBookAvailableQuery = "SELECT id_available FROM books WHERE id = ?";
-//        String doesUserExist = "SELECT COUNT(id) FROM users WHERE id = ?";
-//        String updateBookQuery = "UPDATE books SET is_available = ? WHERE id = ?";
-//        try (Connection connection = DbConnection.getConnection();
-//             PreparedStatement stmt = connection.prepareStatement(query);
-//             PreparedStatement isBookAvailableStmt = connection.prepareStatement(isBookAvailableQuery);
-//             PreparedStatement doesUserExistStmt = connection.prepareStatement(doesUserExist);
-//             PreparedStatement updateBook = connection.prepareStatement(updateBookQuery)
-//        ) {
-//            isBookAvailableStmt.setInt(1, borrow.getBook().getId());
-//
-//            stmt.setInt(1, borrow.getStudent().getId());
-//            stmt.setInt(2, borrow.getBook().getId());
-//            stmt.setDate(3, new java.sql.Date(borrow.getBorrowDate().getTime()));
-//            stmt.setDate(4,
-//                    borrow.getReturnDate() == null ? null :
-//                    new java.sql.Date(borrow.getReturnDate().getTime())
-//            );
-//            stmt.executeUpdate();
-//
-//            updateBook.setBoolean(1, false);
-//            updateBook.setInt(2, borrow.getBook().getId());
-//            updateBook.executeUpdate();
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//            return false;
-//        }
-//        return true;
-//    }
-
-    public String save(Borrow borrow) {
+    public String borrowBook(Borrow borrow) {
         String doesUserExistQuery = "SELECT COUNT(id) FROM students WHERE id = ?";
         String doesBookExistQuery = "SELECT COUNT(id) FROM books WHERE id = ?";
         String isBookAvailableQuery = "SELECT is_available FROM books WHERE id = ?";
@@ -124,4 +93,55 @@ public class BorrowDAO {
         }
     }
 
+    public String returnBook(Borrow borrow) {
+        String doesUserExistQuery = "SELECT COUNT(id) FROM students WHERE id = ?";
+        String doesBookExistQuery = "SELECT COUNT(id) FROM books WHERE id = ?";
+        String isBookBorrowedQuery = "SELECT COUNT(*) FROM borrows WHERE student_id = ? AND book_id = ? AND return_date IS NULL";
+        String updateBookQuery = "UPDATE books SET is_available = ? WHERE id = ?";
+        String updateBorrowQuery = "UPDATE borrows SET return_date = ? WHERE student_id = ? AND book_id = ? AND return_date IS NULL";
+
+        try (Connection connection = DbConnection.getConnection();
+             PreparedStatement doesUserExistStmt = connection.prepareStatement(doesUserExistQuery);
+             PreparedStatement doesBookExistStmt = connection.prepareStatement(doesBookExistQuery);
+             PreparedStatement isBookBorrowedStmt = connection.prepareStatement(isBookBorrowedQuery);
+             PreparedStatement updateBookStmt = connection.prepareStatement(updateBookQuery);
+             PreparedStatement updateBorrowStmt = connection.prepareStatement(updateBorrowQuery)) {
+
+            // Verify if the student and book exist
+            doesUserExistStmt.setInt(1, borrow.getStudent().getId());
+            ResultSet userResult = doesUserExistStmt.executeQuery();
+            doesBookExistStmt.setInt(1, borrow.getBook().getId());
+            ResultSet bookResult = doesBookExistStmt.executeQuery();
+
+            if ((userResult.next() && userResult.getInt(1) == 0) ||
+                    (bookResult.next() && bookResult.getInt(1) == 0)) {
+                return "Étudiant ou livre non trouvé.";
+            }
+
+            // Check if the book is borrowed by the student and hasn't been returned yet
+            isBookBorrowedStmt.setInt(1, borrow.getStudent().getId());
+            isBookBorrowedStmt.setInt(2, borrow.getBook().getId());
+            ResultSet borrowResult = isBookBorrowedStmt.executeQuery();
+            if (borrowResult.next() && borrowResult.getInt(1) == 0) {
+                return "Ce livre n'a pas été emprunté par cet étudiant.";
+            }
+
+            // Update the borrow entry with the return date
+            updateBorrowStmt.setDate(1, java.sql.Date.valueOf(LocalDate.now()));
+            updateBorrowStmt.setInt(2, borrow.getStudent().getId());
+            updateBorrowStmt.setInt(3, borrow.getBook().getId());
+            updateBorrowStmt.executeUpdate();
+
+            // Update the book availability to true
+            updateBookStmt.setBoolean(1, true);
+            updateBookStmt.setInt(2, borrow.getBook().getId());
+            updateBookStmt.executeUpdate();
+
+            return "Livre retourné avec succès!";
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return "Erreur lors du retour du livre.";
+        }
+    }
 }
